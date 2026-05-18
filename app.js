@@ -102,9 +102,9 @@ async function main() {
 
 main();
 
-// app.get('/', (req, res) => { 
-//     res.send("Hello World!");
-// });
+app.get('/', (req, res) => { 
+res.redirect("/listings");
+});
 
 // app.get('/demouser', async(req, res) => {
 //     let fakeUser = new User({ username: 'john_doe', email: 'john.doe@example.com' });
