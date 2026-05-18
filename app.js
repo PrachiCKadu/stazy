@@ -11,7 +11,7 @@ const methodOverride = require('method-override');
 const ejsMate = require('ejs-mate');
 const ExpressError = require('./utils/ExpressError.js');
 const session = require('express-session');
-const MongoStore = require('connect-mongo');
+const MongoStore = require('connect-mongo').default;
 const flash = require('connect-flash');
 const passport = require('passport');
 const LocalStrategy = require('passport-local');
@@ -26,7 +26,7 @@ const dbUrl = process.env.ATLASDB_URL;
 app.engine('ejs', ejsMate);
 
 app.use(methodOverride('_method'));
-
+app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({ extended: true }));
 app.set('view engine', 'ejs');
@@ -76,15 +76,31 @@ app.use((req, res, next) => {
     next();
 });
 
-main().then(() => {
-console.log('Connected to MongoDB');
-}).catch(err => {
-console.error('Error connecting to MongoDB:', err);
-});
+// main().then(() => {
+// console.log('Connected to MongoDB');
+// }).catch(err => {
+// console.error('Error connecting to MongoDB:', err);
+// });
     
+// async function main() {
+//     await mongoose.connect(dbUrl);
+// }
+
 async function main() {
-    await mongoose.connect(dbUrl);
+    try {
+        await mongoose.connect(dbUrl);
+        console.log("Connected to MongoDB");
+
+        app.listen(port, "0.0.0.0", () => {
+            console.log(`Server running on port ${port}`);
+        });
+
+    } catch (err) {
+        console.log("MongoDB Error:", err);
+    }
 }
+
+main();
 
 // app.get('/', (req, res) => { 
 //     res.send("Hello World!");
@@ -126,6 +142,6 @@ app.use((err, req, res, next) => {
 });
 
 
-app.listen(port, () => {
-  console.log(`Server is running on http://localhost:${port}`);
-});
+// app.listen(port, () => {
+//   console.log(`Server is running on http://localhost:${port}`);
+// });
