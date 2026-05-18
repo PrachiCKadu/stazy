@@ -1,0 +1,84 @@
+<% layout("/layouts/boilerplate") %>
+<div class="row mt-3">
+    <div class="col-8 offset-2">
+        <br><br>
+    <h3>Create New Listing</h3>
+    <form method="POST" action="/listings" novalidate class="needs-validation" enctype="multipart/form-data">
+
+<div class="mb-3">
+<label for="title" class="form-label">Title</label>
+        <input 
+        type="text" 
+        id="title" 
+        name="listing[title]" 
+        required
+        placeholder="Add a catchy title"
+        class="form-control">
+    <div class="invalid-feedback">Please enter a title.</div>
+            <div class="valid-feedback">Looks Good!</div>
+</div>
+
+<div class="mb-3">
+   <label for="description" class="form-label">Description</label>
+        <textarea id="description" required name="listing[description]" class="form-control" placeholder="Enter Detailed Description" rows="4" cols="50"></textarea>
+        <div class="invalid-feedback">Please enter a description.</div>
+        <div class="valid-feedback">Looks Good!</div>
+</div>
+
+<div class="row">
+    <div class="mb-3 col-md-4">
+ <label for="price" class="form-label">Price</label>
+        <input type="number"
+        placeholder="eg., 12,000"
+        id="price" required name="listing[price]" step="0.01" class="form-control">
+        <div class="invalid-feedback">Please enter a valid price.</div>
+            <div class="valid-feedback">Looks Good!</div>
+
+        </div>
+
+<div class="mb-3 col-md-8">
+<label for="country" class="form-label">Country</label>
+        <input type="text" id="country" name="listing[country]" required
+        placeholder="eg., India"
+        class="form-control">
+        <div class="invalid-feedback">Please enter a valid country.</div>
+<div class="valid-feedback">Looks Good!</div>
+
+        </div>
+
+</div>
+
+        
+
+        <div class="mb-3">
+ <label for="location" class="form-label">Location</label>
+        <input type="text"
+        placeholder="eg., Mumbai" required
+        id="location" name="listing[location]" class="form-control">
+        <div class="invalid-feedback">Please enter a valid location.</div>
+            <div class="valid-feedback">Looks Good!</div>
+        </div>
+            
+
+
+        <div class="mb-3">
+    <label for="image" class="form-label">Upload Listing Image</label>
+
+    <input 
+        name="listing[image]"
+        id="image"
+        type="file"
+        required
+        class="form-control">
+</div>
+
+
+        
+        
+        <button type="submit" class="btn btn-dark add-btn mt-3">Create Listing</button>
+    
+    </form>
+    
+
+</div>
+</div>
